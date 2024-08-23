@@ -38,12 +38,9 @@ func newCustomMessage(input webhookstructs.NewCustomWebhookMessage) {
 	tempBlockList := append(*(newMessage.Attachments[0].Blocks), fieldBlock)
 	newMessage.Attachments[0].Blocks = &tempBlockList
 	// now actually send the message
-	/*
-		logging.LogDebug("webhook about to fire", "url", webhookURL, "message", newMessage)
-		messageBytes, _ := json.MarshalIndent(newMessage, "", "  ")
-		fmt.Printf("%s", string(messageBytes))
+	logging.LogError("webhook about to fire: custom", "url", webhookURL, "message", newMessage)
+	messageBytes, _ := json.MarshalIndent(newMessage, "", "  ")
+	fmt.Printf("%s", string(messageBytes))
 
-	*/
-
-	webhookstructs.SubmitWebRequest("POST", webhookURL, newMessage)
+	// webhookstructs.SubmitWebRequest("POST", webhookURL, newMessage)
 }

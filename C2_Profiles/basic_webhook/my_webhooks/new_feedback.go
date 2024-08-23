@@ -103,12 +103,10 @@ func newfeedbackWebhook(input webhookstructs.NewFeedbackWebookMessage) {
 	tempBlockList := append(*(newMessage.Attachments[0].Blocks), fieldBlock, dividerBlock, messageBlock)
 	newMessage.Attachments[0].Blocks = &tempBlockList
 	// now actually send the message
-	/*
-		logging.LogDebug("webhook about to fire", "url", webhookURL, "message", newMessage)
-		messageBytes, _ := json.MarshalIndent(newMessage, "", "  ")
-		fmt.Printf("%s", string(messageBytes))
 
-	*/
+	logging.LogError("webhook about to fire: feedback", "url", webhookURL, "message", newMessage)
+	messageBytes, _ := json.MarshalIndent(newMessage, "", "  ")
+	fmt.Printf("%s", string(messageBytes))
 
-	webhookstructs.SubmitWebRequest("POST", webhookURL, newMessage)
+	// webhookstructs.SubmitWebRequest("POST", webhookURL, newMessage)
 }
